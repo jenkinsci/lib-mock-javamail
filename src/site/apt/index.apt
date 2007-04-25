@@ -1,0 +1,43 @@
+                                    ------
+                                    Mock JavaMail
+                                    ------
+                                    ------
+                                    ------
+
+What is this?
+
+  Testing JavaMail applications is more difficult than necessary, because it involves in a lot of set up outside the test program. Doing this correctly in a portable way so that anyone in your team can run the test is almost impossible.
+
+  Mock JavaMail comes to rescue. This project takes advantage of pluggability in JavaMail, so that you can send/receive e-mails against the temporary in-memory "mailbox". For example, when this jar is in your classpath, the following code that normally sends e-mail to me actually just sends the e-mail to an in-memory mailbox:
+
+---------------------------
+MimeMessage msg = new MimeMessage();
+...
+msg.setRecipients(TO,"kohsuke.kawaguchi@sun.com");
+Transport.send(msg);
+---------------------------
+
+   You can access this e-mail programatically like this:
+
+---------------------------
+List<Message> inbox = Mailbox.get("kohsuke.kawaguchi@sun.com");
+assertEquals(inbox.size(),1); // was the e-mail really sent?
+---------------------------
+
+   You can also directly add messages to this list to emulate e-mails in the inbox, instead of using JavaMail API. Staging e-mails like that is useful for testing the server.
+
+   Similarly you can access these e-mails programatically by using JavaMail, just like you normally do:
+
+---------------------------
+Session session = ...;
+Store store = session.getStore("pop3");  // imap would do, too
+
+// connect to kohsuke.kawaguchi@sun.com mailbox
+store.connect("sun.com","kohsuke.kawaguchi","anything");
+
+Folder folder = store.getFolder("INBOX");
+folder.open(Folder.READ_WRITE);
+Message[] msgs = folder.getMessages();
+---------------------------
+
+   This allows you to test both the sending side and receiving side. All you need to do is to drop the jar in the classpath during the test.
