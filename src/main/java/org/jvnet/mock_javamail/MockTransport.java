@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.URLName;
+import javax.mail.internet.MimeMessage;
 
 /**
  * Mock {@link Transport} to deliver to {@link Mailbox}.
@@ -23,6 +24,7 @@ public class MockTransport extends Transport {
 
     public void sendMessage(Message msg, Address[] addresses) throws MessagingException {
         for (Address a : addresses)
-            Mailbox.get(a).add(msg);
+            // create a copy to isolate the sender and the receiver
+            Mailbox.get(a).add(new MimeMessage((MimeMessage)msg));
     }
 }
