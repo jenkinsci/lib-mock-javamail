@@ -37,7 +37,7 @@ public class Mailbox extends ArrayList<Message> {
      */
     public synchronized static Mailbox get(Address a) {
         Mailbox inbox = mailboxes.get(a);
-        if(a==null)
+        if(inbox==null)
             mailboxes.put(a,inbox=new Mailbox(a));
         return inbox;
     }

@@ -90,7 +90,7 @@ public class MockFolder extends Folder {
     }
 
     public Message getMessage(int msgnum) throws MessagingException {
-        return mailbox.get(msgnum);
+        return mailbox.get(msgnum-1);   // 1-origin!? please.
     }
 
     public void appendMessages(Message[] msgs) throws MessagingException {
