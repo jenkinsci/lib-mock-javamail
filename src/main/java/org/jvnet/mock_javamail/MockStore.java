@@ -22,7 +22,6 @@ public class MockStore extends Store {
     public void connect(String host, int port, String user, String password) throws MessagingException {
         address = user+'@'+host;
         folder = new MockFolder(this,Mailbox.get(address));
-        super.connect(host, port, user, password);
     }
 
     public Folder getDefaultFolder() throws MessagingException {

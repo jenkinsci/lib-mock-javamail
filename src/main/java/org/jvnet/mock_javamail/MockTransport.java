@@ -17,6 +17,10 @@ public class MockTransport extends Transport {
         super(session, urlname);
     }
 
+    public void connect(String host, int port, String user, String password) throws MessagingException {
+        // noop 
+    }
+
     public void sendMessage(Message msg, Address[] addresses) throws MessagingException {
         for (Address a : addresses)
             Mailbox.get(a).add(msg);
