@@ -46,6 +46,11 @@ Testing error handling behaviors
 
    <<<Mailbox>>> can be marked as 'error' programatically, which causes all sending/receiving operations to fail. This can be used to test the error handling behavior of the application.
 
+---------------------------
+Mailbox inbox = Mailbox.get("kohsuke.kawaguchi@sun.com");
+inbox.setError(true);
+---------------------------
+
 Related projects
 
    If this project isn't what you were lookcing for, see the following related projects:
