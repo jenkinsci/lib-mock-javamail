@@ -16,6 +16,8 @@ import java.util.Map;
 public class Mailbox extends ArrayList<Message> {
     private final Address address;
 
+    private boolean error;
+
     public Mailbox(Address address) {
         this.address = address;
     }
@@ -25,6 +27,26 @@ public class Mailbox extends ArrayList<Message> {
      */
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns true if this mailbox is flagged as 'error'.
+     *
+     * @see #setError(boolean)
+     */
+    public boolean isError() {
+        return error;
+    }
+
+    /**
+     * Sets if this mailbox should be flagged as 'error'.
+     *
+     * Any sending/receiving operation with an error mailbox
+     * will fail. This behavior can be used to test the error
+     * handling behavior of the application.
+     */
+    public void setError(boolean error) {
+        this.error = error;
     }
 
     /**

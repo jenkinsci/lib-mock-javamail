@@ -21,7 +21,10 @@ public class MockStore extends Store {
 
     public void connect(String host, int port, String user, String password) throws MessagingException {
         address = user+'@'+host;
-        folder = new MockFolder(this,Mailbox.get(address));
+        Mailbox mailbox = Mailbox.get(address);
+        folder = new MockFolder(this, mailbox);
+        if(mailbox.isError())
+            throw new MessagingException("Simulated error connecting to "+address);
     }
 
     public Folder getDefaultFolder() throws MessagingException {
