@@ -41,3 +41,17 @@ Message[] msgs = folder.getMessages();
 ---------------------------
 
    This allows you to test both the sending side and receiving side. All you need to do is to drop the jar in the classpath during the test.
+
+Testing error handling behaviors
+
+   <<<Mailbox>>> can be marked as 'error' programatically, which causes all sending/receiving operations to fail. This can be used to test the error handling behavior of the application.
+
+Related projects
+
+   If this project isn't what you were lookcing for, see the following related projects:
+
+   * {{{http://subethasmtp.tigris.org/wiser.html}Wiser}}
+
+   * {{{http://quintanasoft.com/dumbster/}dumbster}}
+   
+   * {{{https://aspirin.dev.java.net/}Aspirin}}
