@@ -91,4 +91,11 @@
     </plugins>
   </reporting>
 
+  <licenses>
+    <license>
+        <name>Common Development And Distribution License</name>
+        <url>http://www.sun.com/cddl/cddl.html</url>
+        <distribution>repo</distribution>
+    </license>
+  </licenses>
 </project>
