@@ -74,7 +74,8 @@ public class MockFolder extends Folder {
     }
 
     public void close(boolean expunge) throws MessagingException {
-        // always succeed
+        if(expunge)
+            expunge();
     }
 
     public boolean isOpen() {
