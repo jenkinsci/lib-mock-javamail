@@ -67,4 +67,11 @@ public class Mailbox extends ArrayList<Message> {
     public static Mailbox get(String address) throws AddressException {
         return get(new InternetAddress(address));
     }
+
+    /**
+     * Discards all the mailboxes and its data.
+     */
+    public static void clearAll() {
+        mailboxes.clear();
+    }
 }
