@@ -34,7 +34,7 @@
     </repository>
     <site>
       <id>local</id>
-      <url>file:../www/</url>
+      <url>svn:https://svn.dev.java.net/svn/mock-javamail/trunk/www/</url>
     </site>
   </distributionManagement>
 
