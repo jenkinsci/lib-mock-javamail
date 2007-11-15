@@ -19,6 +19,10 @@ public class MockStore extends Store {
         super(session, urlname);
     }
 
+    public void connect() throws MessagingException {
+        connect(url.getHost(), url.getPort(), url.getUsername(), url.getPassword());
+    }
+
     public void connect(String host, int port, String user, String password) throws MessagingException {
         address = user+'@'+host;
         Mailbox mailbox = Mailbox.get(address);
