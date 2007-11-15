@@ -13,6 +13,10 @@
     <developerConnection>scm:svn:https://svn.dev.java.net/svn/mock-javamail</developerConnection>
     <url>https://mock-javamail.dev.java.net/source/browse/mock-javamail</url>
   </scm>
+
+  <issueManagement>
+    <url>https://mock-javamail.dev.java.net/issues/</url>
+  </issueManagement>
   
   <repositories>
     <repository>
