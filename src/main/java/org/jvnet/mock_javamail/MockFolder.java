@@ -83,7 +83,7 @@ public class MockFolder extends Folder {
     }
 
     public Flags getPermanentFlags() {
-        throw new UnsupportedOperationException();
+        return null;
     }
 
     public int getMessageCount() throws MessagingException {
