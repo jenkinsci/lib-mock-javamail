@@ -71,7 +71,7 @@
       <extension>
         <groupId>org.jvnet.wagon-svn</groupId>
         <artifactId>wagon-svn</artifactId>
-        <version>1.0</version>
+        <version>1.6</version>
       </extension>
     </extensions>
   </build>
