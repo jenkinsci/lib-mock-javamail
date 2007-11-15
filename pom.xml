@@ -17,6 +17,16 @@
   <issueManagement>
     <url>https://mock-javamail.dev.java.net/issues/</url>
   </issueManagement>
+
+  <mailingLists>
+    <mailingList>
+      <name>users list</name>
+      <subscribe>users-subscribe@mock-javamail.dev.java.net</subscribe>
+      <unsubscribe>users-unsubscribe@mock-javamail.dev.java.net</unsubscribe>
+      <post>users@mock-javamail.dev.java.net</post>
+      <archive>https://mock-javamail.dev.java.net/servlets/SummarizeList?listName=users</archive>
+    </mailingList>
+  </mailingLists>
   
   <repositories>
     <repository>
