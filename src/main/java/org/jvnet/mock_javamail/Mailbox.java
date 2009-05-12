@@ -4,17 +4,28 @@ import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * In-memory mailbox that hosts messages.
+ *
+ * <p>
+ * This class also maintains the 'unread' flag for messages that are newly added.
+ * This flag is automatically removed when the message is retrieved, much like
+ * how MUA behaves. This flag affects {@link MockFolder#getNewMessageCount()}.
  *
  * @author Kohsuke Kawaguchi
  */
 public class Mailbox extends ArrayList<Message> {
     private final Address address;
+    /**
+     * Of the mails in the {@link ArrayList}, these are considered unread.
+     *
+     * <p>
+     * Because we can't intercept every mutation of {@link ArrayList},
+     * this set may contain messages that are no longer in them.
+     */
+    private final Set<Message> unread = new HashSet<Message>();
 
     private boolean error;
 
@@ -66,6 +77,37 @@ public class Mailbox extends ArrayList<Message> {
 
     public static Mailbox get(String address) throws AddressException {
         return get(new InternetAddress(address));
+    }
+
+    public int getNewMessageCount() {
+        // to compute the real size, we need to trim off all the e-mails that are no longer in the base set
+        unread.retainAll(this);
+        return unread.size();
+    }
+
+    public Message get(int msgnum){
+        Message m = super.get(msgnum-1);
+        unread.remove(m);
+        return m;
+    }
+
+    public boolean addAll(Collection<? extends Message> messages){
+        unread.addAll(messages);
+        return super.addAll(messages);
+    }
+
+    @Override
+    public boolean add(Message message) {
+        unread.add(message);
+        return super.add(message); 
+    }
+
+    /**
+     * Removes the 'new' status from all the e-mails.
+     * Akin to "mark all e-mails as read" in the MUA.
+     */
+    public void clearNewStatus() {
+        unread.clear();
     }
 
     /**

@@ -5,9 +5,7 @@ import javax.mail.Flags.Flag;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -53,7 +51,7 @@ public class MockFolder extends Folder {
     }
 
     public boolean hasNewMessages() throws MessagingException {
-        return false;
+        return mailbox.getNewMessageCount()>0;
     }
 
     public Folder getFolder(String name) throws MessagingException {
@@ -90,8 +88,23 @@ public class MockFolder extends Folder {
         return mailbox.size();
     }
 
+    @Override
+    public int getNewMessageCount() throws MessagingException {
+        return mailbox.getNewMessageCount();
+    }
+
     public Message getMessage(int msgnum) throws MessagingException {
         return mailbox.get(msgnum-1);   // 1-origin!? please.
+    }
+
+    @Override
+     public Message[] getMessages(int low, int high) throws MessagingException {
+        List<Message> messages = new ArrayList<Message>();
+        for(int i=low; i<high; i++){
+            Message m = mailbox.get(i);
+            messages.add(m);
+        }
+        return messages.toArray( new Message[messages.size()]);
     }
 
     public void appendMessages(Message[] msgs) throws MessagingException {
