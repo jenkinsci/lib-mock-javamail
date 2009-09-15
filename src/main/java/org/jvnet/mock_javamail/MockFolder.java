@@ -100,7 +100,7 @@ public class MockFolder extends Folder {
     @Override
      public Message[] getMessages(int low, int high) throws MessagingException {
         List<Message> messages = new ArrayList<Message>();
-        for(int i=low; i<high; i++){
+        for(int i=low; i<=high; i++){
             Message m = mailbox.get(i);
             messages.add(m);
         }
