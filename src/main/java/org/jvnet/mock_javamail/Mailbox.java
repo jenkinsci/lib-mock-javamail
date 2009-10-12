@@ -86,7 +86,7 @@ public class Mailbox extends ArrayList<Message> {
     }
 
     public Message get(int msgnum){
-        Message m = super.get(msgnum-1);
+        Message m = super.get(msgnum);
         unread.remove(m);
         return m;
     }
