@@ -43,10 +43,15 @@
   </repositories>
 
   <distributionManagement>
+    <snapshotRepository>
+      <id>jvnet-nexus-snapshots</id>
+      <name>Java.net Nexus Snapshots Repository</name>
+      <url>https://maven.java.net/content/repositories/snapshots/</url>
+    </snapshotRepository>
     <repository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>local-repository</id>
-      <url>svn:https://svn.java.net/svn/maven2-repository/trunk/repository/</url>
+      <id>jvnet-nexus-staging</id>
+      <name>Java.net Nexus Staging Repository</name>
+      <url>https://maven.java.net/service/local/staging/deploy/maven2/</url>
     </repository>
     <site>
       <id>local</id>
