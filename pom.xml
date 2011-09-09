@@ -9,8 +9,8 @@
   <url>https://http://java.net/projects/mock-javamail</url>
   
   <scm>
-    <connection>scm:svn:https://svn.java.net/svn/mock-javamail/</connection>
-    <developerConnection>scm:svn:https://svn.java.net/svn/mock-javamail</developerConnection>
+    <connection>scm:svn:https://svn.java.net/svn/mock-javamail~svn/trunk/mock-javamail</connection>
+    <developerConnection>scm:svn:https://svn.java.net/svn/mock-javamail~svn/trunk/mock-javamail</developerConnection>
     <url>https://java.net/projects/mock-javamail/sources/browse/mock-javamail</url>
   </scm>
 
