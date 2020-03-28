@@ -4,10 +4,10 @@
   <artifactId>mock-javamail</artifactId>
   <version>1.12-SNAPSHOT</version>
   <packaging>jar</packaging>
-  
+
   <name>JavaMail mock objects</name>
   <url>https://http://java.net/projects/mock-javamail</url>
-  
+
   <scm>
     <connection>scm:svn:https://svn.java.net/svn/mock-javamail~svn/trunk/mock-javamail</connection>
     <developerConnection>scm:svn:https://svn.java.net/svn/mock-javamail~svn/trunk/mock-javamail</developerConnection>
@@ -27,7 +27,7 @@
       <archive>http://java.net/projects/mock-javamail/lists/users/archive</archive>
     </mailingList>
   </mailingLists>
-  
+
   <repositories>
     <repository>
       <id>java.net</id>
@@ -86,7 +86,7 @@
         </configuration>
       </plugin>
     </plugins>
-    
+
     <extensions>
       <extension>
         <groupId>org.jvnet.wagon-svn</groupId>
@@ -95,12 +95,12 @@
       </extension>
     </extensions>
   </build>
-  
+
   <dependencies>
     <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.4</version>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
+      <version>1.6.2</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
