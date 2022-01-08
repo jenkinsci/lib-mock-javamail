@@ -1,100 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jenkins-ci</groupId>
+    <artifactId>jenkins</artifactId>
+    <version>1.70</version>
+    <relativePath />
+  </parent>
+
   <groupId>org.jvnet.mock-javamail</groupId>
   <artifactId>mock-javamail</artifactId>
-  <version>1.12-SNAPSHOT</version>
+  <version>${revision}${changelist}</version>
   <packaging>jar</packaging>
-
   <name>JavaMail mock objects</name>
-  <url>https://http://java.net/projects/mock-javamail</url>
+  <url>https://github.com/jenkinsci/lib-${project.artifactId}</url>
 
-  <scm>
-    <connection>scm:svn:https://svn.java.net/svn/mock-javamail~svn/trunk/mock-javamail</connection>
-    <developerConnection>scm:svn:https://svn.java.net/svn/mock-javamail~svn/trunk/mock-javamail</developerConnection>
-    <url>https://java.net/projects/mock-javamail/sources/browse/mock-javamail</url>
+  <licenses>
+    <license>
+      <name>CDDL-1.0</name>
+      <url>https://opensource.org/licenses/CDDL-1.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
+    <connection>scm:git:https://github.com/${gitHubRepo}</connection>
+    <developerConnection>scm:git:git@github.com:${gitHubRepo}.git</developerConnection>
+    <tag>${scmTag}</tag>
+    <url>https://github.com/${gitHubRepo}</url>
   </scm>
 
-  <issueManagement>
-    <url>http://java.net/jira/browse/MOCK_JAVAMAIL</url>
-  </issueManagement>
+  <properties>
+    <revision>1.12</revision>
+    <changelist>-SNAPSHOT</changelist>
+    <java.level>8</java.level>
+    <gitHubRepo>jenkinsci/lib-${project.artifactId}</gitHubRepo>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-  <mailingLists>
-    <mailingList>
-      <name>users list</name>
-      <subscribe>users-subscribe@mock-javamail.java.net</subscribe>
-      <unsubscribe>users-unsubscribe@mock-javamail.java.net</unsubscribe>
-      <post>users@mock-javamail.java.net</post>
-      <archive>http://java.net/projects/mock-javamail/lists/users/archive</archive>
-    </mailingList>
-  </mailingLists>
-
-  <repositories>
-    <repository>
-      <id>java.net</id>
-      <url>http://java.net/projects/maven2-repository</url>
-      <layout>legacy</layout>
-    </repository>
-    <repository>
-      <id>maven2-repository.java.net</id>
-      <name>Java.net Repository for Maven</name>
-      <url>http://download.java.net/maven/2/</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>jvnet-nexus-snapshots</id>
-      <name>Java.net Nexus Snapshots Repository</name>
-      <url>https://maven.java.net/content/repositories/snapshots/</url>
-    </snapshotRepository>
-    <repository>
-      <id>jvnet-nexus-staging</id>
-      <name>Java.net Nexus Staging Repository</name>
-      <url>https://maven.java.net/service/local/staging/deploy/maven2/</url>
-    </repository>
-    <site>
-      <id>local</id>
-      <url>svn:https://svn.java.net/svn/mock-javamail/trunk/www/</url>
-    </site>
-  </distributionManagement>
-
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-idea-plugin</artifactId>
-        <configuration>
-          <jdkName>JDK1.5</jdkName>
-          <downloadSources>true</downloadSources>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>src</descriptorRef>
-            <descriptorRef>bin</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-      </plugin>
-    </plugins>
-
-    <extensions>
-      <extension>
-        <groupId>org.jvnet.wagon-svn</groupId>
-        <artifactId>wagon-svn</artifactId>
-        <version>1.6</version>
-      </extension>
-    </extensions>
-  </build>
+    <!-- TODO lots of violations -->
+    <spotbugs.threshold>High</spotbugs.threshold>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -105,26 +50,21 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-jxr-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </reporting>
+  <repositories>
+    <repository>
+      <id>repo.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </repository>
+  </repositories>
 
-  <licenses>
-    <license>
-        <name>Common Development And Distribution License</name>
-        <url>http://www.sun.com/cddl/cddl.html</url>
-        <distribution>repo</distribution>
-    </license>
-  </licenses>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>repo.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>

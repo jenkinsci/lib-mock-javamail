@@ -1,10 +1,15 @@
 package org.jvnet.mock_javamail;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import java.util.*;
 
 /**
  * In-memory mailbox that hosts messages.
@@ -25,7 +30,7 @@ public class Mailbox extends ArrayList<Message> {
      * Because we can't intercept every mutation of {@link ArrayList},
      * this set may contain messages that are no longer in them.
      */
-    private final Set<Message> unread = new HashSet<Message>();
+    private final Set<Message> unread = new HashSet<>();
 
     private boolean error;
 
@@ -63,7 +68,7 @@ public class Mailbox extends ArrayList<Message> {
     /**
      * All mailboxes.
      */
-    private static final Map<Address,Mailbox> mailboxes = new HashMap<Address,Mailbox>();
+    private static final Map<Address,Mailbox> mailboxes = new HashMap<>();
 
     /**
      * Get the inbox for the given address.
@@ -85,12 +90,14 @@ public class Mailbox extends ArrayList<Message> {
         return unread.size();
     }
 
+    @Override
     public Message get(int msgnum){
         Message m = super.get(msgnum);
         unread.remove(m);
         return m;
     }
 
+    @Override
     public boolean addAll(Collection<? extends Message> messages){
         unread.addAll(messages);
         return super.addAll(messages);
