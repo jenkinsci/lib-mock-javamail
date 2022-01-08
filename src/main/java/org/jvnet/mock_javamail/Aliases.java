@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 /**
- * Reads <tt>/META-INF/mock-javamail.aliases</tt> file so tha you can
+ * Reads {@code /META-INF/mock-javamail.aliases} file so tha you can
  * have different names for SMTP and POP/IMAP servers. This is useful
  * for writing a test that can work with both real servers and mock up servers.
  *
@@ -33,11 +34,8 @@ public class Aliases {
         if (instance == null) {
             Map<Address,Address> aliasMap = new HashMap<Address,Address>();
             InputStream in = Aliases.class.getResourceAsStream("/META-INF/mock-javamail.aliases");
-            if (in == null) {
-                
-            } else {
-                try {
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            if (in != null) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         int index = line.indexOf('=');
@@ -51,14 +49,6 @@ public class Aliases {
                 }
                 catch (IOException ex) {
                     throw new MessagingException("Unable to read alias file", ex);
-                }
-                finally {
-                    try {
-                        in.close();
-                    }
-                    catch (IOException ex) {
-                        // Close silently
-                    }
                 }
             }
             instance = new Aliases(aliasMap);
