@@ -1,0 +1,65 @@
+= Mock JavaMail
+
+== What is this?
+
+Testing JavaMail applications is more difficult than necessary, because it involves a lot of setup outside the test program.
+Doing this correctly in a portable way so that anyone in your team can run the test is almost impossible.
+
+Mock JavaMail comes to the rescue. This project takes advantage of pluggability in JavaMail, so that you can send/receive e-mails against a temporary in-memory "mailbox".
+For example, when this JAR is in your classpath, the following code that normally sends e-mail to me actually just sends the e-mail to an in-memory mailbox:
+
+[source,java]
+----
+MimeMessage msg = new MimeMessage();
+...
+msg.setRecipients(TO,"first.last@example.com");
+Transport.send(msg);
+----
+
+You can access this e-mail programatically like this:
+
+[source,java]
+----
+List<Message> inbox = Mailbox.get("first.last@example.com");
+assertEquals(inbox.size(),1); // was the e-mail really sent?
+----
+
+You can also directly add messages to this list to emulate e-mails in the inbox, instead of using the JavaMail API.
+Staging e-mails like this is useful for testing the server.
+
+Similarly you can access these e-mails programatically by using JavaMail, just like you normally do:
+
+[source,java]
+----
+Session session = ...;
+Store store = session.getStore("pop3");  // imap would do, too
+
+// connect to first.last@example.com mailbox
+store.connect("example.com","first.last","anything");
+
+Folder folder = store.getFolder("INBOX");
+folder.open(Folder.READ_WRITE);
+Message[] msgs = folder.getMessages();
+----
+
+This allows you to test both the sending side and receiving side.
+All you need to do is to drop the JAR in the classpath during the test.
+
+== Testing error handling behaviors
+
+`Mailbox` can be marked as 'error' programatically, which causes all sending/receiving operations to fail.
+This can be used to test the error handling behavior of the application.
+
+[source,java]
+----
+Mailbox inbox = Mailbox.get("first.last@example.com");
+inbox.setError(true);
+----
+
+== Related projects
+
+If this project isn't what you were looking for, see the following related projects:
+
+* http://subethasmtp.tigris.org/wiser.html[Wiser]
+* http://quintanasoft.com/dumbster/[dumbster]
+* https://aspirin.dev.java.net/[Aspirin]
