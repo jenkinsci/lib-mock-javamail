@@ -18,10 +18,12 @@ public class MockTransport extends Transport {
         super(session, urlname);
     }
 
+    @Override
     public void connect(String host, int port, String user, String password) throws MessagingException {
         // noop 
     }
 
+    @Override
     public void sendMessage(Message msg, Address[] addresses) throws MessagingException {
         for (Address a : addresses) {
             // create a copy to isolate the sender and the receiver

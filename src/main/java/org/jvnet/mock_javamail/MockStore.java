@@ -19,10 +19,12 @@ public class MockStore extends Store {
         super(session, urlname);
     }
 
+    @Override
     public void connect() throws MessagingException {
         connect(url.getHost(), url.getPort(), url.getUsername(), url.getPassword());
     }
 
+    @Override
     protected boolean protocolConnect(String host, int port, String user, String password) throws MessagingException {
         address = user+'@'+host;
         Mailbox mailbox = Mailbox.get(Aliases.getInstance().resolve(address));
@@ -32,14 +34,17 @@ public class MockStore extends Store {
         return true;
     }
 
+    @Override
     public Folder getDefaultFolder() throws MessagingException {
         return folder;
     }
 
+    @Override
     public Folder getFolder(String name) throws MessagingException {
         return folder;
     }
 
+    @Override
     public Folder getFolder(URLName url) throws MessagingException {
         return folder;
     }
