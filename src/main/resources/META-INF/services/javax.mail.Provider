@@ -1,0 +1,3 @@
+org.jvnet.mock_javamail.SMTPMockProvider
+org.jvnet.mock_javamail.POP3MockProvider
+org.jvnet.mock_javamail.IMAPMockProvider
