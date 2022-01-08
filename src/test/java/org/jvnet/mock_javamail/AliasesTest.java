@@ -2,8 +2,8 @@ package org.jvnet.mock_javamail;
 
 import static org.junit.Assert.assertEquals;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
 import org.junit.Test;
 
 public class AliasesTest {

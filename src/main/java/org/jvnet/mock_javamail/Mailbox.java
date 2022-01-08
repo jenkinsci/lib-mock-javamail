@@ -1,15 +1,15 @@
 package org.jvnet.mock_javamail;
 
+import jakarta.mail.Address;
+import jakarta.mail.Message;
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 
 /**
  * In-memory mailbox that hosts messages.

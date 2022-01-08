@@ -1,6 +1,6 @@
 package org.jvnet.mock_javamail;
 
-import javax.mail.Provider;
+import jakarta.mail.Provider;
 
 /**
  * @author Réda Housni Alaoui
