@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.mail.Address;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -32,7 +31,7 @@ public class Aliases {
     
     public synchronized static Aliases getInstance() throws MessagingException {
         if (instance == null) {
-            Map<Address,Address> aliasMap = new HashMap<Address,Address>();
+            Map<Address,Address> aliasMap = new HashMap<>();
             InputStream in = Aliases.class.getResourceAsStream("/META-INF/mock-javamail.aliases");
             if (in != null) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
