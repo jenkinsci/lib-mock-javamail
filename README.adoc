@@ -56,6 +56,10 @@ Mailbox inbox = Mailbox.get("first.last@example.com");
 inbox.setError(true);
 ----
 
+== Documentation
+
+* https://javadoc.jenkins.io/component/mock-javamail/[Javadoc]
+
 == Related projects
 
 If this project isn't what you were looking for, see the following related projects:
