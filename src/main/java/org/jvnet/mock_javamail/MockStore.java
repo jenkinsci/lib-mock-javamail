@@ -1,5 +1,6 @@
 package org.jvnet.mock_javamail;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.mail.Folder;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Session;
@@ -34,16 +35,19 @@ public class MockStore extends Store {
         return true;
     }
 
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "TODO needs triage")
     @Override
     public Folder getDefaultFolder() throws MessagingException {
         return folder;
     }
 
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "TODO needs triage")
     @Override
     public Folder getFolder(String name) throws MessagingException {
         return folder;
     }
 
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "TODO needs triage")
     @Override
     public Folder getFolder(URLName url) throws MessagingException {
         return folder;

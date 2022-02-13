@@ -109,6 +109,16 @@ public class Mailbox extends ArrayList<Message> {
         return super.add(message); 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
     /**
      * Removes the 'new' status from all the e-mails.
      * Akin to "mark all e-mails as read" in the MUA.
