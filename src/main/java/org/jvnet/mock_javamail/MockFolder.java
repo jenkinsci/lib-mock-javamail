@@ -1,6 +1,5 @@
 package org.jvnet.mock_javamail;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.mail.Flags;
 import jakarta.mail.Flags.Flag;
 import jakarta.mail.Folder;
@@ -16,7 +15,6 @@ import java.util.List;
 public class MockFolder extends Folder {
     private final Mailbox mailbox;
 
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "TODO needs triage")
     public MockFolder(MockStore store, Mailbox mailbox) {
         super(store);
         this.mailbox = mailbox;
