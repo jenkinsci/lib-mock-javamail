@@ -45,6 +45,44 @@ Message[] msgs = folder.getMessages();
 This allows you to test both the sending side and receiving side.
 All you need to do is to drop the JAR in the classpath during the test.
 
+== Enforcing usage in tests
+
+This library works thanks to the https://jakarta.ee/specifications/mail/2.1/apidocs/jakarta.mail/jakarta/mail/session#getProvider(java.lang.String)[JavaMail API] which allows to use different providers implementation to handle actual email sending.
+
+To ensure it's used in your tests, you need to define the following Java system properties:
+
+`mail.smtp.class`:: set to `org.jvnet.mock_javamail.MockTransport`
+`mail.pop3.class`:: set to `org.jvnet.mock_javamail.MockStore`
+`mail.imap.class`:: set to `org.jvnet.mock_javamail.MockStore`
+
+This can be done either manually or via a configuration in your test runner.
+
+=== Maven
+
+For example, with Maven this can be done with the following configuration:
+
+[source,xml]
+----
+<project>
+  […]
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemPropertyVariables>
+            <mail.smtp.class>org.jvnet.mock_javamail.MockTransport</mail.smtp.class>
+            <mail.pop3.class>org.jvnet.mock_javamail.MockStore</mail.pop3.class>
+            <mail.imap.class>org.jvnet.mock_javamail.MockStore</mail.imap.class>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+----
+
 == Testing error handling behaviors
 
 `Mailbox` can be marked as 'error' programatically, which causes all sending/receiving operations to fail.
