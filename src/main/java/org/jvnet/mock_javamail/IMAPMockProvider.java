@@ -8,11 +8,6 @@ import jakarta.mail.Provider;
 public class IMAPMockProvider extends Provider {
 
     public IMAPMockProvider() {
-        super(
-                Provider.Type.STORE,
-                "imap",
-                MockStore.class.getName(),
-                "java.net mock-javamail project",
-                null);
+        super(Provider.Type.STORE, "imap", MockStore.class.getName(), "java.net mock-javamail project", null);
     }
 }

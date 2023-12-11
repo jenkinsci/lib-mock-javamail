@@ -10,8 +10,12 @@ public class AliasesTest {
     @Test
     public void testResolve() throws MessagingException {
         Aliases aliases = Aliases.getInstance();
-        assertEquals(new InternetAddress("alias1@example.com"), aliases.resolve(new InternetAddress("address1@example.com")));
-        assertEquals(new InternetAddress("alias2@example.com"), aliases.resolve(new InternetAddress("address2@example.com")));
+        assertEquals(
+                new InternetAddress("alias1@example.com"),
+                aliases.resolve(new InternetAddress("address1@example.com")));
+        assertEquals(
+                new InternetAddress("alias2@example.com"),
+                aliases.resolve(new InternetAddress("address2@example.com")));
     }
 
     @Test

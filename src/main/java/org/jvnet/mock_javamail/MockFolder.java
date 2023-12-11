@@ -62,7 +62,7 @@ public class MockFolder extends Folder {
 
     @Override
     public boolean hasNewMessages() throws MessagingException {
-        return mailbox.getNewMessageCount()>0;
+        return mailbox.getNewMessageCount() > 0;
     }
 
     @Override
@@ -88,8 +88,9 @@ public class MockFolder extends Folder {
 
     @Override
     public void close(boolean expunge) throws MessagingException {
-        if(expunge)
+        if (expunge) {
             expunge();
+        }
     }
 
     @Override
@@ -114,13 +115,13 @@ public class MockFolder extends Folder {
 
     @Override
     public Message getMessage(int msgnum) throws MessagingException {
-        return mailbox.get(msgnum-1);   // 1-origin!? please.
+        return mailbox.get(msgnum - 1); // 1-origin!? please.
     }
 
     @Override
-     public Message[] getMessages(int low, int high) throws MessagingException {
+    public Message[] getMessages(int low, int high) throws MessagingException {
         List<Message> messages = new ArrayList<>();
-        for(int i=low; i<=high; i++){
+        for (int i = low; i <= high; i++) {
             Message m = mailbox.get(i);
             messages.add(m);
         }
@@ -136,8 +137,9 @@ public class MockFolder extends Folder {
     public Message[] expunge() throws MessagingException {
         List<Message> expunged = new ArrayList<>();
         for (Message msg : mailbox) {
-            if(msg.getFlags().contains(Flag.DELETED))
+            if (msg.getFlags().contains(Flag.DELETED)) {
                 expunged.add(msg);
+            }
         }
         mailbox.removeAll(expunged);
         return expunged.toArray(new Message[0]);

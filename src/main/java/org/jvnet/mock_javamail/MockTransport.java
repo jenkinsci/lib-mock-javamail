@@ -20,7 +20,7 @@ public class MockTransport extends Transport {
 
     @Override
     public void connect(String host, int port, String user, String password) throws MessagingException {
-        // noop 
+        // noop
     }
 
     @Override
@@ -28,9 +28,10 @@ public class MockTransport extends Transport {
         for (Address a : addresses) {
             // create a copy to isolate the sender and the receiver
             Mailbox mailbox = Mailbox.get(Aliases.getInstance().resolve(a));
-            if(mailbox.isError())
-                throw new MessagingException("Simulated error sending message to "+a);
-            mailbox.add(new MimeMessage((MimeMessage)msg));
+            if (mailbox.isError()) {
+                throw new MessagingException("Simulated error sending message to " + a);
+            }
+            mailbox.add(new MimeMessage((MimeMessage) msg));
         }
     }
 }

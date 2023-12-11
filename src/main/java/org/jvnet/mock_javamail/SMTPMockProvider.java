@@ -8,11 +8,6 @@ import jakarta.mail.Provider;
 public class SMTPMockProvider extends Provider {
 
     public SMTPMockProvider() {
-        super(
-                Provider.Type.TRANSPORT,
-                "smtp",
-                MockTransport.class.getName(),
-                "java.net mock-javamail project",
-                null);
+        super(Provider.Type.TRANSPORT, "smtp", MockTransport.class.getName(), "java.net mock-javamail project", null);
     }
 }
