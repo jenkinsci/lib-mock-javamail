@@ -22,16 +22,16 @@ import java.util.Map;
  */
 public class Aliases {
     private static Aliases instance;
-    
-    private final Map<Address,Address> aliasMap;
-    
-    private Aliases(Map<Address,Address> aliasMap) {
+
+    private final Map<Address, Address> aliasMap;
+
+    private Aliases(Map<Address, Address> aliasMap) {
         this.aliasMap = aliasMap;
     }
-    
-    public synchronized static Aliases getInstance() throws MessagingException {
+
+    public static synchronized Aliases getInstance() throws MessagingException {
         if (instance == null) {
-            Map<Address,Address> aliasMap = new HashMap<>();
+            Map<Address, Address> aliasMap = new HashMap<>();
             InputStream in = Aliases.class.getResourceAsStream("/META-INF/mock-javamail.aliases");
             if (in != null) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
@@ -41,12 +41,12 @@ public class Aliases {
                         if (index == -1) {
                             throw new MessagingException("Invalid entry in alias file");
                         } else {
-                            aliasMap.put(new InternetAddress(line.substring(0, index)),
-                                         new InternetAddress(line.substring(index+1)));
+                            aliasMap.put(
+                                    new InternetAddress(line.substring(0, index)),
+                                    new InternetAddress(line.substring(index + 1)));
                         }
                     }
-                }
-                catch (IOException ex) {
+                } catch (IOException ex) {
                     throw new MessagingException("Unable to read alias file", ex);
                 }
             }
@@ -54,17 +54,16 @@ public class Aliases {
         }
         return instance;
     }
-    
+
     public Address resolve(Address address) {
         Address alias = aliasMap.get(address);
         return alias != null ? alias : address;
     }
-    
+
     public String resolve(String address) {
         try {
             return resolve(new InternetAddress(address)).toString();
-        }
-        catch (AddressException ex) {
+        } catch (AddressException ex) {
             return address;
         }
     }

@@ -26,11 +26,12 @@ public class MockStore extends Store {
 
     @Override
     protected boolean protocolConnect(String host, int port, String user, String password) throws MessagingException {
-        address = user+'@'+host;
+        address = user + '@' + host;
         Mailbox mailbox = Mailbox.get(Aliases.getInstance().resolve(address));
         folder = new MockFolder(this, mailbox);
-        if(mailbox.isError())
-            throw new MessagingException("Simulated error connecting to "+address);
+        if (mailbox.isError()) {
+            throw new MessagingException("Simulated error connecting to " + address);
+        }
         return true;
     }
 

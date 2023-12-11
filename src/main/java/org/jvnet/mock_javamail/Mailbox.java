@@ -68,15 +68,16 @@ public class Mailbox extends ArrayList<Message> {
     /**
      * All mailboxes.
      */
-    private static final Map<Address,Mailbox> mailboxes = new HashMap<>();
+    private static final Map<Address, Mailbox> mailboxes = new HashMap<>();
 
     /**
      * Get the inbox for the given address.
      */
-    public synchronized static Mailbox get(Address a) {
+    public static synchronized Mailbox get(Address a) {
         Mailbox inbox = mailboxes.get(a);
-        if(inbox==null)
-            mailboxes.put(a,inbox=new Mailbox(a));
+        if (inbox == null) {
+            mailboxes.put(a, inbox = new Mailbox(a));
+        }
         return inbox;
     }
 
@@ -91,14 +92,14 @@ public class Mailbox extends ArrayList<Message> {
     }
 
     @Override
-    public Message get(int msgnum){
+    public Message get(int msgnum) {
         Message m = super.get(msgnum);
         unread.remove(m);
         return m;
     }
 
     @Override
-    public boolean addAll(Collection<? extends Message> messages){
+    public boolean addAll(Collection<? extends Message> messages) {
         unread.addAll(messages);
         return super.addAll(messages);
     }
@@ -106,7 +107,7 @@ public class Mailbox extends ArrayList<Message> {
     @Override
     public boolean add(Message message) {
         unread.add(message);
-        return super.add(message); 
+        return super.add(message);
     }
 
     @Override
